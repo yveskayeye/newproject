@@ -1,9 +1,9 @@
-from crypt import methods
-from operator import methodcaller
-from flask import Blueprint, flash,render_template
+from flask import Blueprint, flash,render_template, session
 from flask_login import login_required
-from ..models import Asset, db
-from .forms import AddForm
+from ..models import Asset, db, Appointment, Record
+from .forms import AddForm, AppointForm, RecordForm
+from datetime import datetime
+from .email import send_email
 
 add_bp = Blueprint("add_bp", __name__, template_folder="templates",
                     static_folder="static")
@@ -30,20 +30,125 @@ def add():
 
 @add_bp.route("/add_med", methods=["GET", "POST"])
 def add_med():
-    return render_template("add/add_med.html")
+    form = RecordForm()
+    name = session.get("name")
+    last_name = session.get("last_name")
+
+    if form.validate_on_submit():
+        record = Record(
+            name = form.name.data,
+            age = form.age.data,
+            address = form.address.data,
+            blood_type = form.blood_type.data,
+            number_children = form.number_children.data,
+            last_birth = form.last_birth.data,
+            allergies = form.allergies.data,
+            medical_condition = form.medical_condition.data
+        )
+
+        db.session.add(record)
+        db.session.commit()
+
+        flash("Record added", category="success")
+        
+    return render_template("add/add_med.html", form=form, name=name, last_name=last_name)
 
 @add_bp.route("/checkup", methods=["GET", "POST"])
 def checkup():
-    return render_template("add/checkup.html")
+    form = AppointForm()
+    name = session.get("name")
+    last_name = session.get("last_name")
+
+    if form.validate_on_submit():
+        tyme = get_date()
+        appointment = Appointment(
+            name = form.name.data,
+            mobile = form.mobile.data,
+            email = form.email.data,
+            date = tyme
+        )
+
+        db.session.add(appointment)
+        db.session.commit()
+
+        flash("appointment will be booked and emailed to you shortly", category="success")
+        send_email(tyme, form.email.data)
+
+    return render_template("add/checkup.html", form=form, name=name, last_name=last_name)
 
 @add_bp.route("/doctor", methods=["GET", "POST"])
 def doctor():
-    return render_template("add/doctor.html")
+    form = AppointForm()
+    name = session.get("name")
+    last_name = session.get("last_name")
+
+    if form.validate_on_submit():
+        tyme = get_date()
+        appointment = Appointment(
+            name = form.name.data,
+            mobile = form.mobile.data,
+            email = form.email.data,
+            date = tyme
+        )
+
+        db.session.add(appointment)
+        db.session.commit()
+
+        flash("appointment will be booked and emailed to you shortly", category="success")
+        send_email(tyme, form.email.data)
+
+    return render_template("add/doctor.html", form=form, name=name, last_name=last_name)
 
 @add_bp.route("/new_med", methods=["GET", "POST"])
 def new_med():
-    return render_template("add/new_med.html")
+    form = RecordForm()
+    name = session.get("name")
+    last_name = session.get("last_name")
+
+    if form.validate_on_submit():
+        record = Record(
+            name = form.name.data,
+            age = form.age.data,
+            address = form.address.data,
+            blood_type = form.blood_type.data,
+            number_children = form.number_children.data,
+            last_birth = form.last_birth.data,
+            allergies = form.allergies.data,
+            medical_condition = form.medical_condition.data
+        )
+
+        db.session.add(record)
+        db.session.commit()
+
+        flash("Record added", category="success")
+    return render_template("add/new_med.html", form=form, name=name, last_name=last_name)
 
 @add_bp.route("/scan", methods=["GET", "POST"])
 def scan():
-    return render_template("add/scan.html")
+    name = session.get("name")
+    last_name = session.get("last_name")
+    form = AppointForm()
+
+    if form.validate_on_submit():
+        tyme = get_date()
+        appointment = Appointment(
+            name = form.name.data,
+            mobile = form.mobile.data,
+            email = form.email.data,
+            date = tyme
+        )
+
+        db.session.add(appointment)
+        db.session.commit()
+
+        send_email(tyme, form.email.data)
+        flash("appointment will be booked and emailed to you shortly", category="success")
+
+
+    return render_template("add/scan.html", form=form, name=name, last_name=last_name)
+
+def get_date():
+    time = datetime.now()
+    timestamp = datetime.timestamp(time)
+    
+    return timestamp + 5

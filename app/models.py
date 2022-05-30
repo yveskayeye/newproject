@@ -51,3 +51,34 @@ class Flag(UserMixin, db.Model):
     
     def __repr__(self):
         return '<User %r>' % self.flag
+
+
+class Appointment(UserMixin, db.Model):
+
+    __tablename__ = "appointments"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80),  nullable=False)
+    mobile = db.Column(db.String(120),  nullable=False)
+    email = db.Column(db.String(120), nullable=False)
+    date = db.Column(db.String(120), unique=True, nullable=False)
+    
+    def __repr__(self):
+        return '<User %r>' % self.name
+
+class Record(UserMixin, db.Model):
+
+    __tablename__ = "records"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80),  nullable=False)
+    address = db.Column(db.String(120),  nullable=False)
+    blood_type = db.Column(db.String(120),  nullable=False)
+    age = db.Column(db.String(120),  nullable=False)
+    allergies = db.Column(db.String(120), nullable=False)
+    number_children = db.Column(db.String(120), nullable=False)
+    last_birth = db.Column(db.String(120), nullable=False)
+    medical_condition = db.Column(db.String(120), nullable=False)
+    
+    def __repr__(self):
+        return '<User %r>' % self.name

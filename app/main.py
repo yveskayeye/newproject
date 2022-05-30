@@ -2,12 +2,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_mail import Mail
 import os
 
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 migrate = Migrate()
+mail = Mail()
 
 def create_app(config_name):
 
@@ -15,7 +17,14 @@ def create_app(config_name):
     app.config.from_object(config_name)
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+    app.config["MAIL_SERVER"] = 'smtp.gmail.com'
+    app.config["MAIL_PORT"] = 465
+    app.config["MAIL_USERNAME"] = 'singleodin234@gmail.com'
+    app.config["MAIL_PASSWORD"] = 'qw12dx$%'
+    app.config["MAIL_TLS"] = False
+    app.config["MAIL_SSL"] = True
     db.init_app(app)
+    mail.init_app(app)
     
 
     login_manager.init_app(app)

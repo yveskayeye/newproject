@@ -10,39 +10,48 @@
 {% block content %} 
 <h1 class="h3 mb-4 ml-5 text-gray-800">Add medical records</h1>
 <hr>
- 
-<form class="row g-3 my-4 mr-5 ml-5">
-
+<div class= "alert-success" role="alert">{% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class="flashes">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}</div>
+<form action="{{ url_for('add_bp.add_med') }}" method="POST" novalidate class="row g-3 my-4 mr-5 ml-5">
+  {{ form.csrf_token }}
     <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Email</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <label for="inputEmail4" class="form-label">{{ form.name.label }}</label>
+      {{form.name(size=30, class="form-control", id="inputEmail4")}}
     </div>
     <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">Password</label>
-      <input type="password" class="form-control" id="inputPassword4">
+      <label for="inputPassword4" class="form-label">{{ form.age.label }}</label>
+      {{form.age(size=30, class="form-control", id="inputPassword4")}}
     </div>
     <div class="col-12 mt-3">
-      <label for="inputAddress" class="form-label">Address</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-    </div>
-    <div class="col-12 mt-3">
-      <label for="inputAddress2" class="form-label">Address 2</label>
-      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+      <label for="inputAddress" class="form-label">{{ form.address.label }}</label>
+      {{form.address(size=30, class="form-control", id="inputAddress", placeholder="1234 Main St")}}
     </div>
     <div class="col-md-6 mt-3">
-      <label for="inputCity" class="form-label">City</label>
-      <input type="text" class="form-control" id="inputCity">
+      <label for="inputCity" class="form-label">{{ form.blood_type.label }}</label>
+      {{form.blood_type(size=30, class="form-control", id="inputCity")}}
     </div>
-    <div class="col-md-4 mt-3">
-      <label for="inputState" class="form-label">State</label>
-      <select id="inputState" class="form-select">
-        <option selected>Choose...</option>
-        <option>...</option>
-      </select>
+    <div class="col-md-6 mt-3">
+      <label for="number_children" class="form-label">{{ form.number_children.label }}</label>
+      {{form.number_children(size=30, class="form-control", id="number_children")}}
     </div>
-    <div class="col-md-2 mt-3">
-      <label for="inputZip" class="form-label">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
+    <div class="col-md-6 mt-3">
+      <label for="last_birth" class="form-label">{{ form.last_birth.label }}</label>
+      {{form.last_birth(size=30, class="form-control", id="last_birth")}}
+    </div>
+    <div class="col-md-6 mt-3">
+      <label for="allergies" class="form-label">{{ form.allergies.label }}</label>
+      {{form.allergies(size=30, class="form-control", id="allergies")}}
+    </div>
+    <div class="col-md-6 mt-3">
+      <label for="medical_condition" class="form-label">{{ form.medical_condition.label }}</label>
+      {{form.medical_condition(size=30, class="form-control", id="medical_condition")}}
     </div>
     <div class="col-12 mt-3">
       <div class="form-check">
@@ -53,7 +62,16 @@
       </div>
     </div>
     <div class="col-12 mt-3">
-      <button type="submit" class="btn btn-primary">Sign in</button>
+      {{ form.submit(class="btn btn-primary") }}
     </div>
   </form>
+  <span>{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}</span>
 {% endblock %}
