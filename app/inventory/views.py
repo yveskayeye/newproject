@@ -1,10 +1,17 @@
 from flask import Blueprint, render_template
-from ..models import Asset
+from datetime import datetime
+from ..models import Appointment
 
 inventory_bp = Blueprint("inventory_bp", __name__, template_folder="templates",
                         static_folder="static")
 
 @inventory_bp.route("/")
 def inventory():
-    assets = Asset.query.all()
-    return render_template("inventory/inventory.html", assets=assets)
+    appointments = Appointment.query.all()
+    for appointment in appointments:
+        appointment.date = datetime.fromtimestamp(float(appointment.date))
+    return render_template("inventory/inventory.html", appointments=appointments)
+
+@inventory_bp.route("/stats")
+def stats():
+    return render_template("inventory/stats.html",)
