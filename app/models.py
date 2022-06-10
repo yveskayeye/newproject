@@ -82,3 +82,31 @@ class Record(UserMixin, db.Model):
     
     def __repr__(self):
         return '<User %r>' % self.name
+
+class RecordTwo(UserMixin, db.Model):
+
+    __tablename__ = "recordsTwo"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80),  nullable=False)
+    address = db.Column(db.String(120),  nullable=False)
+    blood_type = db.Column(db.String(120),  nullable=False)
+    age = db.Column(db.String(120),  nullable=False)
+    allergies = db.Column(db.String(120), nullable=False)
+    number_children = db.Column(db.String(120), nullable=False)
+    last_birth = db.Column(db.String(120), nullable=False)
+    medical_condition = db.Column(db.String(120), nullable=False)
+    miscarriage = db.Column(db.String(80),  nullable=False)
+    still_birth = db.Column(db.String(120),  nullable=False)
+    premature_birth = db.Column(db.String(120),  nullable=False)
+    pre_clamsia = db.Column(db.String(120),  nullable=False)
+    gestation_diabetes = db.Column(db.String(120), nullable=False)
+    hiv_status = db.Column(db.String(120), nullable=False)
+    sugar_levels = db.Column(db.String(120), nullable=False)
+    weight = db.Column(db.String(120), nullable=False)
+    prev_dev = db.Column(db.String(120), nullable=False)
+    id_number = db.Column(db.String(120), nullable=False)
+    marital_status = db.Column(db.String(120), nullable=False)
+    
+    def __repr__(self):
+        return '<User %r>' % self.name

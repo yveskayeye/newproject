@@ -23,7 +23,7 @@ def login():
        
         if user.is_admin:
             login_user(user)
-            return redirect(url_for("home_bp.home"))
+            return redirect(url_for("home_bp.home_admin"))
         if user is not None:
             if check_password_hash(user.password, login_form.password.data):
                 login_user(user)

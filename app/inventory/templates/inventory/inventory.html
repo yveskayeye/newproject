@@ -2,6 +2,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{url_for('add_bp.static', filename='add/styles.css')}}">
+<link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 {% endblock %}
 {% block title %}<title>View appointment history</title> {% endblock %}
 
@@ -52,7 +53,7 @@
 {% endblock %}
 
 {% block scripts%}
-<script src="{{url_for('add_bp.static', filename='js/demo/datatables-demo.js')}}"></script> 
-<script src="{{url_for('add_bp.static', filename='datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{url_for('add_bp.static', filename='datatables/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{url_for('vendor_bp.static', filename='js/demo/datatables-demo.js')}}"></script> 
+<script src="{{url_for('vendor_bp.static', filename='datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{url_for('vendor_bp.static', filename='datatables/dataTables.bootstrap4.min.js')}}"></script>
 {% endblock %}

@@ -1,6 +1,6 @@
 from flask import Blueprint, flash,render_template, session
 from flask_login import login_required
-from ..models import Asset, db, Appointment, Record
+from ..models import Asset, db, Appointment, Record, RecordTwo
 from .forms import AddForm, AppointForm, RecordForm
 from datetime import datetime
 from .email import send_email
@@ -116,8 +116,31 @@ def new_med():
             allergies = form.allergies.data,
             medical_condition = form.medical_condition.data
         )
+        record2 = RecordTwo(
+            name = form.name.data,
+            age = form.age.data,
+            address = form.address.data,
+            blood_type = form.blood_type.data,
+            number_children = form.number_children.data,
+            last_birth = form.last_birth.data,
+            allergies = form.allergies.data,
+            medical_condition = form.medical_condition.data,
+            miscarriage = form.miscarriage.data,
+            still_birth = form.still_birth.data,
+            premature_birth = form.premature_birth.data,
+            pre_clamsia = form.pre_clamsia.data,
+            gestation_diabetes = form.gestation_diabetes.data,
+            hiv_status = form.hiv_status.data,
+            sugar_levels = form.sugar_levels.data,
+            weight = form.weight.data,
+            prev_dev = form.prev_dev.data,
+            id_number = form.id_number.data,
+            marital_status =form.marital_status.data,
+        )
 
         db.session.add(record)
+        db.session.commit()
+        db.session.add(record2)
         db.session.commit()
 
         flash("Record added", category="success")
