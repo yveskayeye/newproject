@@ -19,10 +19,4 @@ def stats():
 @inventory_bp.route("/patients")
 def patients():
     record2 = RecordTwo.query.all()
-    for record in record2:
-        record["risk_level"] = get_risk(record)
-
     return render_template("inventory/patients.html", records=record2)
-
-def get_risk(record):
-    pass

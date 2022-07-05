@@ -4,6 +4,7 @@ from ..models import Asset, db, Appointment, Record, RecordTwo
 from .forms import AddForm, AppointForm, RecordForm
 from datetime import datetime
 from .email import send_email
+from . import predict
 
 add_bp = Blueprint("add_bp", __name__, template_folder="templates",
                     static_folder="static")
@@ -116,11 +117,26 @@ def new_med():
             allergies = form.allergies.data,
             medical_condition = form.medical_condition.data
         )
+        data  = [
+            form.age.data,
+            form.systolic_BP.data,
+            form.diastolic_BP.data,
+            form.blood_sugar.data,
+            form.body_temp.data,
+            form.heart_rate.data,
+        ]
+         
         record2 = RecordTwo(
             name = form.name.data,
             age = form.age.data,
             address = form.address.data,
             blood_type = form.blood_type.data,
+            systolic_BP = form.systolic_BP.data,
+            diastolic_BP = form.diastolic_BP.data,
+            blood_sugar = form.blood_sugar.data,
+            body_temp = form.body_temp.data,
+            heart_rate = form.heart_rate.data,
+            risk_level = predict.get_prediction(data),
             number_children = form.number_children.data,
             last_birth = form.last_birth.data,
             allergies = form.allergies.data,

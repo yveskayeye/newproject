@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, session
 from flask_login import login_required
+from ..models import Appointment, Record
 
 home_bp = Blueprint("home_bp", __name__, template_folder="templates",
                     static_folder="static")
@@ -10,7 +11,12 @@ home_bp = Blueprint("home_bp", __name__, template_folder="templates",
 def home():
     name = session.get("name")
     last_name = session.get("last_name")
-    return render_template("home/index.html", name=name, last_name=last_name, admin= False)
+    appoint = Appointment.query.filter_by(name=name)
+    count = 0
+    for _ in appoint:
+        count += 1
+    total_appoint = count
+    return render_template("home/index.html", name=name, last_name=last_name, admin= False, appoint_total=total_appoint)
 
 @login_required
 @home_bp.route("/admin", methods=["GET", "POST"])

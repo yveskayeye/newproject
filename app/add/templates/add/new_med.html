@@ -19,7 +19,7 @@
   </ul>
   {% endif %}
   {% endwith %}</div>
-<form action="{{ url_for('add_bp.add_med') }}" method="POST" novalidate class="row g-3 my-4 mr-5 ml-5">
+<form action="{{ url_for('add_bp.new_med') }}" method="POST" novalidate class="row g-3 my-4 mr-5 ml-5">
   {{ form.csrf_token }}
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">{{ form.name.label }}</label>
@@ -36,6 +36,26 @@
     <div class="col-md-6 mt-3">
       <label for="inputCity" class="form-label">{{ form.blood_type.label }}</label>
       {{form.blood_type(size=30, class="form-control", id="inputCity")}}
+    </div>
+    <div class="col-md-6 mt-3">
+      <label for="sbp" class="form-label">{{ form.systolic_BP.label }}</label>
+      {{form.systolic_BP(size=30, class="form-control", id="sbp")}}
+    </div>
+    <div class="col-md-6 mt-3">
+      <label for="diastolic_BP" class="form-label">{{ form.diastolic_BP.label }}</label>
+      {{form.diastolic_BP(size=30, class="form-control", id="diastolic_BP")}}
+    </div>
+    <div class="col-md-6 mt-3">
+      <label for="blood_sugar" class="form-label">{{ form.blood_sugar.label }}</label>
+      {{form.blood_sugar(size=30, class="form-control", id="blood_sugar")}}
+    </div>
+    <div class="col-md-6 mt-3">
+      <label for="body_temp" class="form-label">{{ form.body_temp.label }}</label>
+      {{form.body_temp(size=30, class="form-control", id="body_temp")}}
+    </div>
+    <div class="col-md-6 mt-3">
+      <label for="heart_rate" class="form-label">{{ form.heart_rate.label }}</label>
+      {{form.heart_rate(size=30, class="form-control", id="heart_rate")}}
     </div>
     <div class="col-md-6 mt-3">
       <label for="number_children" class="form-label">{{ form.number_children.label }}</label>

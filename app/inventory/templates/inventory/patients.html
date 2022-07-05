@@ -22,72 +22,90 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th scope="col">Risk Level</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Blood type</th>
+                        <th scope="col">systolic_BP</th>
+                        <th scope="col">diastolic_BP</th>
+                        <th scope="col">blood_sugar</th>
+                        <th scope="col">body_temp</th>
+                        <th scope="col">heart_rate</th>
+                        <th scope="col">Number of children</th>
+                        <th scope="col">Last birth</th>
+                        <th scope="col">Allergies</th>
+                        <th scope="col">Medical conditions</th>
+                        <th scope="col">Miscarriages</th>
+                        <th scope="col">Still Births</th>
+                        <th scope="col">Premature Births</th>
+                        <th scope="col">Pre clamsia</th>
+                        <th scope="col">Gestation Diabetes</th>
+                        <th scope="col">HIV Status</th>
+                        <th scope="col">Sugar Levels</th>
+                        <th scope="col">Weight</th>
+                        <th scope="col">Previous Delivery Mode</th>
+                        <th scope="col">ID Number</th>
+                        <th scope="col">Marital Status</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
+                        <th scope="col">Risk Level</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Blood type</th>
+                        <th scope="col">systolic_BP</th>
+                        <th scope="col">diastolic_BP</th>
+                        <th scope="col">blood_sugar</th>
+                        <th scope="col">body_temp</th>
+                        <th scope="col">heart_rate</th>
+                        <th scope="col">Number of children</th>
+                        <th scope="col">Last birth</th>
+                        <th scope="col">Allergies</th>
+                        <th scope="col">Medical conditions</th>
+                        <th scope="col">Miscarriages</th>
+                        <th scope="col">Still Births</th>
+                        <th scope="col">Premature Births</th>
+                        <th scope="col">Pre clamsia</th>
+                        <th scope="col">Gestation Diabetes</th>
+                        <th scope="col">HIV Status</th>
+                        <th scope="col">Sugar Levels</th>
+                        <th scope="col">Weight</th>
+                        <th scope="col">Previous Delivery Mode</th>
+                        <th scope="col">ID Number</th>
+                        <th scope="col">Marital Status</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     {% for patient in records %}
                     <tr>
+                        <td>{{ patient.risk_level }}</td>
                         <td>{{ patient.name }}</td>
-                        <td>{{ patient.mobile }}</td>
-                        <td>{{ patient.email }}</td>
-                        <td>{{ patient.date }}</td>
-                        <td>{{ patient.name }}</td>
-                        <td>{{ patient.mobile }}</td>
-                        <td>{{ patient.email }}</td>
-                        <td>{{ patient.date }}</td>
-                        <td>{{ patient.name }}</td>
-                        <td>{{ patient.mobile }}</td>
-                        <td>{{ patient.email }}</td>
-                        <td>{{ patient.date }}</td>
-                        <td>{{ patient.name }}</td>
-                        <td>{{ patient.mobile }}</td>
-                        <td>{{ patient.email }}</td>
-                        <td>{{ patient.date }}</td>
-                        <td>{{ patient.name }}</td>
-                        <td>{{ patient.mobile }}</td>
-                        <td>{{ patient.email }}</td>
+                        <td>{{ patient.age }}</td>
+                        <td>{{ patient.address }}</td>
+                        <td>{{ patient.blood_type }}</td>
+                        <td>{{ patient.systolic_BP }}</td>
+                        <td>{{ patient.diastolic_BP }}</td>
+                        <td>{{ patient.blood_sugar }}</td>
+                        <td>{{ patient.body_temp }}</td>
+                        <td>{{ patient.heart_rate }}</td>
+                        <td>{{ patient.number_children }}</td>
+                        <td>{{ patient.last_birth }}</td>
+                        <td>{{ patient.allergies }}</td>
+                        <td>{{ patient.medical_condition }}</td>
+                        <td>{{ patient.miscarriage }}</td>
+                        <td>{{ patient.still_birth }}</td>
+                        <td>{{ patient.premature_birth }}</td>
+                        <td>{{ patient.pre_clamsia }}</td>
+                        <td>{{ patient.gestation_diabetes }}</td>
+                        <td>{{ patient.hiv_status }}</td>
+                        <td>{{ patient.sugar_levels }}</td>
+                        <td>{{ patient.weight }}</td>
+                        <td>{{ patient.prev_dev }}</td>
+                        <td>{{ patient.id_number }}</td>
+                        <td>{{ patient.marital_status }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
