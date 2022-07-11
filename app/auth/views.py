@@ -23,6 +23,7 @@ def login():
        
         if user.is_admin:
             login_user(user)
+            session["is_admin"] = True
             return redirect(url_for("home_bp.home_admin"))
         if user is not None:
             if check_password_hash(user.password, login_form.password.data):

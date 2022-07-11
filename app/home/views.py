@@ -11,12 +11,13 @@ home_bp = Blueprint("home_bp", __name__, template_folder="templates",
 def home():
     name = session.get("name")
     last_name = session.get("last_name")
+    is_admin = session.get("is_admin")
     appoint = Appointment.query.filter_by(name=name)
     count = 0
     for _ in appoint:
         count += 1
     total_appoint = count
-    return render_template("home/index.html", name=name, last_name=last_name, admin= False, appoint_total=total_appoint)
+    return render_template("home/index.html", name=name, last_name=last_name, admin=is_admin, appoint_total=total_appoint)
 
 @login_required
 @home_bp.route("/admin", methods=["GET", "POST"])
@@ -28,8 +29,9 @@ def home_admin():
 @home_bp.route("/patient", methods=["GET", "POST"])
 def patient():
     name = session.get("name")
+    is_admin = session.get("is_admin")
     last_name = session.get("last_name")
-    return render_template("home/patient_settings.html" , name=name, last_name=last_name)
+    return render_template("home/patient_settings.html" , name=name, last_name=last_name, admin=is_admin)
 
 @home_bp.route("/appoint", methods=["GET", "POST"])
 def appoint():

@@ -33,6 +33,7 @@ def add():
 def add_med():
     form = RecordForm()
     name = session.get("name")
+    is_admin = session.get("is_admin")
     last_name = session.get("last_name")
 
     if form.validate_on_submit():
@@ -52,12 +53,13 @@ def add_med():
 
         flash("Record added", category="success")
         
-    return render_template("add/add_med.html", form=form, name=name, last_name=last_name)
+    return render_template("add/add_med.html", form=form, name=name, last_name=last_name, admin=is_admin)
 
 @add_bp.route("/checkup", methods=["GET", "POST"])
 def checkup():
     form = AppointForm()
     name = session.get("name")
+    is_admin = session.get("is_admin")
     last_name = session.get("last_name")
 
     if form.validate_on_submit():
@@ -75,12 +77,13 @@ def checkup():
         flash("appointment will be booked and emailed to you shortly", category="success")
         send_email(tyme, form.email.data)
 
-    return render_template("add/checkup.html", form=form, name=name, last_name=last_name)
+    return render_template("add/checkup.html", form=form, name=name, last_name=last_name, admin=is_admin)
 
 @add_bp.route("/doctor", methods=["GET", "POST"])
 def doctor():
     form = AppointForm()
     name = session.get("name")
+    is_admin = session.get("is_admin")
     last_name = session.get("last_name")
 
     if form.validate_on_submit():
@@ -98,12 +101,13 @@ def doctor():
         flash("appointment will be booked and emailed to you shortly", category="success")
         send_email(tyme, form.email.data)
 
-    return render_template("add/doctor.html", form=form, name=name, last_name=last_name)
+    return render_template("add/doctor.html", form=form, name=name, last_name=last_name, admin=is_admin)
 
 @add_bp.route("/new_med", methods=["GET", "POST"])
 def new_med():
     form = RecordForm()
     name = session.get("name")
+    is_admin = session.get("is_admin")
     last_name = session.get("last_name")
 
     if form.validate_on_submit():
@@ -160,12 +164,13 @@ def new_med():
         db.session.commit()
 
         flash("Record added", category="success")
-    return render_template("add/new_med.html", form=form, name=name, last_name=last_name)
+    return render_template("add/new_med.html", form=form, name=name, last_name=last_name, admin=is_admin)
 
 @add_bp.route("/scan", methods=["GET", "POST"])
 def scan():
     name = session.get("name")
     last_name = session.get("last_name")
+    is_admin = session.get("is_admin")
     form = AppointForm()
 
     if form.validate_on_submit():
@@ -180,11 +185,15 @@ def scan():
         db.session.add(appointment)
         db.session.commit()
 
-        send_email(tyme, form.email.data)
+        try:
+            send_email(tyme, form.email.data)
+        except:
+            flash("No internet access", category="fail")
+
         flash("appointment will be booked and emailed to you shortly", category="success")
 
 
-    return render_template("add/scan.html", form=form, name=name, last_name=last_name)
+    return render_template("add/scan.html", form=form, name=name, last_name=last_name, admin=is_admin)
 
 def get_date():
     time = datetime.now()
